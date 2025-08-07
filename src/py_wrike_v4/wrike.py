@@ -241,6 +241,41 @@ class Wrike:
     def query_user(self, user_id: str) -> dict:
         return self.get(f"users/{user_id}")
 
+    def query_user_schedule_exclusions(self,
+                                       user_ids: list[str] = None,
+                                       date_range: list[str] = None
+                                      ) -> dict:
+        """ Get user schedule exclusions.
+
+        Args:
+            user_ids: Optional list of user IDs to filter by
+            date_range: Optional date range filter
+                       Format: [start_date] or [start_date, end_date] or [equal_date]
+                       Date format: yyyy-MM-dd'T'HH:mm:ss ('T'HH:mm:ss is optional)
+
+        Returns:
+            dict: API response containing user schedule exclusion data
+        """
+        params = {}
+
+        if user_ids:
+            params['userIds'] = convert_list_to_string(user_ids)
+
+        if date_range:
+            if len(date_range) == 1:
+                params['dateRange'] = str({'equal': date_range[0]})
+            elif len(date_range) == 2:
+                params['dateRange'] = str({
+                    'start': date_range[0],
+                    'end': date_range[1]
+                })
+
+        return self.get("user_schedule_exclusions", params)
+
+    def query_user_schedule_exclusion(self, exclusion_id: str) -> dict:
+        """ Get a specific user schedule exclusion by ID. """
+        return self.get(f"user_schedule_exclusions/{exclusion_id}")
+
     # endregion
 
     # region Workflows
