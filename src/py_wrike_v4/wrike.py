@@ -254,7 +254,7 @@ class Wrike:
 
     def query_timelogs(self,
                        location: str = "",
-                       tracked_date: list[str] = []
+                       tracked_date: list[str] = None
                       ) -> dict:
         """ Get the timelogs from an optional location and tracked date range.
 
