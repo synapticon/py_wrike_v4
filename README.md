@@ -26,6 +26,17 @@ The Wrike object performs some internal caching on these properties to reduce th
 2. `custom_fields` - A dictionary containing all custom fields used by projects in the workspace
 3. `folders` - A dictionary containing all folders in the workspace. Includes all subtrees
 
+## ID Conversion
+
+Wrike API v4 uses different ID formats than v2. If you have v2 IDs (from the Wrike website or other sources), you can convert them to v4 format using:
+
+```python
+# Convert v2 IDs to v4 format
+v4_ids = wrike.convert_to_id4s(['2000041', '2000039'], wrike.IdTypes.TASK)
+```
+
+Available ID types: `ACCOUNT`, `USER`, `FOLDER`, `TASK`, `COMMENT`, `ATTACHMENT`, `TIMELOG`
+
 ## Query Methods
 
 The following queries are available in the Wrike object.
@@ -52,7 +63,15 @@ The following queries are available in the Wrike object.
   - query_tasks_in_folder
 - Users
   - query_user
+  - query_user_schedule_exclusions
+  - query_user_schedule_exclusion
+- Work Schedules
+  - query_work_schedules
+- Workflows
+  - query_workflows
+- Timelogs
+  - query_timelogs
 
 # Contributing
 
-Currently, this package only provides a small set of query methods. You can refer to the Wrike API documentation for a full list of functionality that they provide. The main file for adding convenience methods is `wrike.py`. Feel free to create a PR if you'd like to add any additional functionality.
+Currently, this package only provides a small set of query methods. You can refer to the [Wrike API documentation](https://developers.wrike.com) for a full list of functionality that they provide. The main file for adding convenience methods is `wrike.py`. Feel free to create a PR if you'd like to add any additional functionality.
