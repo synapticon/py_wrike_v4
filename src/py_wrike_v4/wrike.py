@@ -259,7 +259,7 @@ class Wrike:
         params = {}
 
         if user_ids:
-            params['userIds'] = convert_list_to_string(user_ids)
+            params['userIds'] = str(user_ids)
 
         if date_range:
             if len(date_range) == 1:
