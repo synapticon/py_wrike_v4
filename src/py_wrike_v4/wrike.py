@@ -285,6 +285,14 @@ class Wrike:
 
     # endregion
 
+    # region Work Schedules
+
+    def query_work_schedules(self) -> dict:
+        """Get all work schedules."""
+        return self.get("workschedules")
+
+    # endregion
+
     # region Timelogs
 
     def query_timelogs(self,
