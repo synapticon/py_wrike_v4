@@ -291,6 +291,33 @@ class Wrike:
         """Get all work schedules."""
         return self.get("workschedules")
 
+    def query_work_schedule_exclusions(self,
+                                        work_schedule_id: str,
+                                        date_range: list[str] = None) -> dict:
+        """Get work schedule exclusions for a specific work schedule.
+
+        Args:
+            work_schedule_id: The ID of the work schedule
+            date_range: Optional date range filter
+                       Format: [start_date] or [start_date, end_date] or [equal_date]
+                       Date format: yyyy-MM-dd'T'HH:mm:ss ('T'HH:mm:ss is optional)
+
+        Returns:
+            dict: API response containing work schedule exclusion data
+        """
+        params = {}
+
+        if date_range:
+            if len(date_range) == 1:
+                params['dateRange'] = str({'equal': date_range[0]})
+            elif len(date_range) == 2:
+                params['dateRange'] = str({
+                    'start': date_range[0],
+                    'end': date_range[1]
+                })
+
+        return self.get(f"workschedules/{work_schedule_id}/workschedule_exclusions", params)
+
     # endregion
 
     # region Timelogs

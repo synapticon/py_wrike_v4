@@ -67,6 +67,7 @@ The following queries are available in the Wrike object.
   - query_user_schedule_exclusion
 - Work Schedules
   - query_work_schedules
+  - query_work_schedule_exclusions
 - Workflows
   - query_workflows
 - Timelogs
